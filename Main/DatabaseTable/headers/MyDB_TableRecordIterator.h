@@ -12,6 +12,9 @@ public:
     virtual void getNext();
     virtual bool hasNext();
     ~MyDB_TableRecordIterator() override ;
+    MyDB_TableRecordIterator();
+
+private:
 };
 
 

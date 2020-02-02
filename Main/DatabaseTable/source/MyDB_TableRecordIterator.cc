@@ -19,4 +19,8 @@ MyDB_TableRecordIterator::~MyDB_TableRecordIterator() {
 
 }
 
+MyDB_TableRecordIterator::MyDB_TableRecordIterator() {
+
+}
+
 #endif

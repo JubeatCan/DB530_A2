@@ -19,4 +19,8 @@ MyDB_PageRecordIterator::~MyDB_PageRecordIterator() {
 
 }
 
+MyDB_PageRecordIterator::MyDB_PageRecordIterator() {
+
+}
+
 #endif

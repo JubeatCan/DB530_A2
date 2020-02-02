@@ -9,9 +9,13 @@ using namespace std;
 
 class MyDB_PageRecordIterator : public MyDB_RecordIterator {
 public:
+    MyDB_PageRecordIterator();
     virtual void getNext();
     virtual bool hasNext();
     ~MyDB_PageRecordIterator() override ;
+
+private:
+
 };
 
 #endif //MYDB_PAGERECORDITERATOR_H
