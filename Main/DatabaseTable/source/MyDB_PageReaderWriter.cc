@@ -32,7 +32,7 @@ bool MyDB_PageReaderWriter :: append (MyDB_RecordPtr recordPtr) {
         return false;
     }
 
-    _wroteLen = (char*)recordPtr->toBinary(getHeader() + _wroteLen) - getHeader();
+    _wroteLen = (char*)recordPtr->toBinary(getHeader() + _wroteLen) - (char*)getHeader();
     _pageHandle -> wroteBytes();
 	return true;
 }
