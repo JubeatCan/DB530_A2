@@ -14,6 +14,7 @@ using namespace std;
 class MyDB_PageReaderWriter;
 class MyDB_TableReaderWriter;
 typedef shared_ptr <MyDB_TableReaderWriter> MyDB_TableReaderWriterPtr;
+typedef shared_ptr <MyDB_PageReaderWriter> MyDB_PageReaderWriterPtr;
 
 class MyDB_TableReaderWriter {
 
@@ -53,6 +54,8 @@ private:
 	// ANYTHING YOU NEED HERE
 	MyDB_TablePtr _tablePtr;
 	MyDB_BufferManagerPtr _bufferManager;
+	vector<MyDB_PageReaderWriterPtr> _pages;
+	size_t _pageSize;
 
 };
 

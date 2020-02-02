@@ -22,4 +22,8 @@ bool MyDB_PageReaderWriter :: append (MyDB_RecordPtr) {
 	return true;
 }
 
+MyDB_PageReaderWriter::MyDB_PageReaderWriter(size_t, MyDB_PageHandle) {
+
+}
+
 #endif

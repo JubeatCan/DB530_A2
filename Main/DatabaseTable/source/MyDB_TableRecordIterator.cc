@@ -19,7 +19,7 @@ MyDB_TableRecordIterator::~MyDB_TableRecordIterator() {
 
 }
 
-MyDB_TableRecordIterator::MyDB_TableRecordIterator() {
+MyDB_TableRecordIterator::MyDB_TableRecordIterator(MyDB_TableReaderWriterPtr, MyDB_RecordPtr) {
 
 }
 

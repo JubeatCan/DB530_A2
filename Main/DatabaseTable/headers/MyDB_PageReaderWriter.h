@@ -4,6 +4,7 @@
 
 #include "MyDB_PageType.h"
 #include "MyDB_TableReaderWriter.h"
+#include "MyDB_PageRecordIterator.h"
 
 class MyDB_PageReaderWriter {
 
@@ -30,10 +31,16 @@ public:
 
 	// sets the type of the page
 	void setType (MyDB_PageType toMe);
+
+	MyDB_PageReaderWriter(size_t, MyDB_PageHandle);
 	
 private:
 
 	// ANYTHING ELSE YOU WANT HERE
+	size_t _pageSize;
+	MyDB_PageHandle _pageHandle;
+
+
 };
 
 #endif

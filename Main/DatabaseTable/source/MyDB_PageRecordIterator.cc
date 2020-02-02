@@ -19,7 +19,7 @@ MyDB_PageRecordIterator::~MyDB_PageRecordIterator() {
 
 }
 
-MyDB_PageRecordIterator::MyDB_PageRecordIterator() {
+MyDB_PageRecordIterator::MyDB_PageRecordIterator(MyDB_PageReaderWriterPtr, MyDB_RecordPtr) {
 
 }
 
