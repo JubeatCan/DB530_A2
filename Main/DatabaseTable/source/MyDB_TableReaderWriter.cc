@@ -8,7 +8,9 @@
 
 using namespace std;
 
-MyDB_TableReaderWriter :: MyDB_TableReaderWriter (MyDB_TablePtr, MyDB_BufferManagerPtr) {
+MyDB_TableReaderWriter :: MyDB_TableReaderWriter (MyDB_TablePtr forMe, MyDB_BufferManagerPtr myBuffer) {
+    _tablePtr = forMe;
+    _bufferManager = myBuffer;
 }
 
 MyDB_PageReaderWriter MyDB_TableReaderWriter :: operator [] (size_t) {
@@ -29,7 +31,8 @@ MyDB_PageReaderWriter MyDB_TableReaderWriter :: last () {
 void MyDB_TableReaderWriter :: append (MyDB_RecordPtr) {
 }
 
-void MyDB_TableReaderWriter :: loadFromTextFile (string) {
+void MyDB_TableReaderWriter :: loadFromTextFile (string fileName) {
+    _tablePtr->
 }
 
 MyDB_RecordIteratorPtr MyDB_TableReaderWriter :: getIterator (MyDB_RecordPtr) {
