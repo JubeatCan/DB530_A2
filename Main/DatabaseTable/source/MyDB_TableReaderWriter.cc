@@ -49,14 +49,42 @@ void MyDB_TableReaderWriter :: append (MyDB_RecordPtr appendMe) {
 }
 
 void MyDB_TableReaderWriter :: loadFromTextFile (string fileName) {
+    for (auto& p : _pages) {
+        p.clear();
+    }
+    _pages.clear();
+    _tablePtr->setLastPage(0);
+    MyDB_PageHandle newPageHandle = _bufferManager->getPage(_tablePtr, 0);
+    MyDB_PageReaderWriter newPageRW(_pageSize, newPageHandle);
+    _pages.push_back(newPageRW);
 
+    ifstream f(fileName);
+    string tempString;
+    MyDB_RecordPtr tempRec = getEmptyRecord();
+    if (f) {
+        while (getline(f, tempString)) {
+            tempRec->fromString(tempString);
+            append(tempRec);
+        }
+        f.close();
+    }
 }
 
 MyDB_RecordIteratorPtr MyDB_TableReaderWriter :: getIterator (MyDB_RecordPtr) {
 	return nullptr;
 }
 
-void MyDB_TableReaderWriter :: writeIntoTextFile (string) {
+void MyDB_TableReaderWriter :: writeIntoTextFile (string fileName) {
+    ofstream f(fileName);
+    MyDB_RecordPtr tempRec = getEmptyRecord();
+    MyDB_RecordIteratorPtr tempIterator = getIterator(tempRec);
+    if (f) {
+        while (tempIterator->hasNext()) {
+            tempIterator -> getNext();
+            f << tempRec << endl;
+        }
+        f.close();
+    }
 }
 
 #endif
