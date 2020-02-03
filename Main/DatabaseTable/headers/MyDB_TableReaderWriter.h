@@ -54,7 +54,8 @@ private:
 	// ANYTHING YOU NEED HERE
 	MyDB_TablePtr _tablePtr;
 	MyDB_BufferManagerPtr _bufferManager;
-	vector<MyDB_PageReaderWriterPtr> _pages;
+	//vector<MyDB_PageReaderWriterPtr> _pages;
+    vector<MyDB_PageReaderWriter> _pages;
 	size_t _pageSize;
 
 };

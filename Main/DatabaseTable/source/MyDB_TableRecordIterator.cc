@@ -19,7 +19,11 @@ MyDB_TableRecordIterator::~MyDB_TableRecordIterator() {
 
 }
 
-MyDB_TableRecordIterator::MyDB_TableRecordIterator(MyDB_TableReaderWriterPtr, MyDB_RecordPtr) {
+MyDB_TableRecordIterator::MyDB_TableRecordIterator(MyDB_TableReaderWriterPtr , MyDB_RecordPtr) {
+//    _recordPtr = ;
+//    _tablePtr = ;
+//    _pageId = 0;
+//    _curtPageIter = ;
 
 }
 

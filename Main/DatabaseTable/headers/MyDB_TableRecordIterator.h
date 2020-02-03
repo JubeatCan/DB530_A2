@@ -19,6 +19,7 @@ public:
 private:
     MyDB_RecordPtr _recordPtr;
     MyDB_TableReaderWriterPtr _tablePtr;
+    size_t _pageId;
 };
 
 
