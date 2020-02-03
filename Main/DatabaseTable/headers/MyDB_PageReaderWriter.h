@@ -2,11 +2,14 @@
 #ifndef PAGE_RW_H
 #define PAGE_RW_H
 
+#include <memory>
 #include "MyDB_PageType.h"
 #include "MyDB_TableReaderWriter.h"
 #include "MyDB_PageRecordIterator.h"
 
-class MyDB_PageReaderWriter {
+using namespace std;
+
+class MyDB_PageReaderWriter : public enable_shared_from_this<MyDB_PageReaderWriter> {
 
 public:
 
@@ -33,13 +36,26 @@ public:
 	void setType (MyDB_PageType toMe);
 
 	MyDB_PageReaderWriter(size_t, MyDB_PageHandle);
+
+	size_t getPageSize() {
+	    return _pageSize;
+	}
+
+	char* getHeader() {
+	    return (char*)_pageHandle->getBytes();
+	}
+
+	size_t getWroteLen() {
+	    return _wroteLen;
+	}
 	
 private:
 
 	// ANYTHING ELSE YOU WANT HERE
 	size_t _pageSize;
 	MyDB_PageHandle _pageHandle;
-	size_t wroteLen;
+	size_t _wroteLen;
+	MyDB_PageType _type;
 
 };
 
