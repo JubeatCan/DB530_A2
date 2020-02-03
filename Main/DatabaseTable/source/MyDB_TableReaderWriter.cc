@@ -34,18 +34,17 @@ MyDB_RecordPtr MyDB_TableReaderWriter :: getEmptyRecord () {
 }
 
 MyDB_PageReaderWriter MyDB_TableReaderWriter :: last () {
-	MyDB_PageReaderWriter lastPageRW = _pages.back();
-	return lastPageRW;
+	return _pages.back();
 }
 
 
 void MyDB_TableReaderWriter :: append (MyDB_RecordPtr appendMe) {
-    if (!last().append(appendMe)) {
+    if (!_pages[_pages.size() - 1].append(appendMe)) {
         _tablePtr->setLastPage(_tablePtr->lastPage() + 1);
         MyDB_PageHandle newPageHandle(_bufferManager->getPage(_tablePtr, _tablePtr->lastPage()));
         MyDB_PageReaderWriter newLastPageRW(_pageSize, newPageHandle);
         _pages.push_back(newLastPageRW);
-        last().append(appendMe);
+        _pages[_pages.size() - 1].append(appendMe);
     }
 }
 
@@ -69,6 +68,8 @@ void MyDB_TableReaderWriter :: loadFromTextFile (string fileName) {
         }
         f.close();
     }
+
+    cout << _pages.size() << endl;
 }
 
 MyDB_RecordIteratorPtr MyDB_TableReaderWriter :: getIterator (MyDB_RecordPtr recordPtr) {

@@ -11,8 +11,8 @@ using namespace std;
 
 class MyDB_TableRecordIterator : public MyDB_RecordIterator {
 public:
-    virtual void getNext();
-    virtual bool hasNext();
+    virtual void getNext() override;
+    virtual bool hasNext() override;
     ~MyDB_TableRecordIterator() override ;
     MyDB_TableRecordIterator(MyDB_TableReaderWriterPtr ,MyDB_RecordPtr);
 

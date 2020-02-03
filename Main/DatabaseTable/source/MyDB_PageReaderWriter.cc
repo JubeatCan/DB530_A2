@@ -28,7 +28,9 @@ void MyDB_PageReaderWriter :: setType (MyDB_PageType newType) {
 }
 
 bool MyDB_PageReaderWriter :: append (MyDB_RecordPtr recordPtr) {
-    if (_pageSize < _wroteLen + recordPtr->getBinarySize()) {
+
+    if (_pageSize < (_wroteLen + recordPtr->getBinarySize())) {
+        cout << _pageSize << "  " << _wroteLen << "  " << recordPtr->getBinarySize() << endl;
         return false;
     }
 
