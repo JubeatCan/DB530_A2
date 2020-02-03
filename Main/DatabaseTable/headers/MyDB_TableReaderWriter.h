@@ -49,6 +49,10 @@ public:
     // access the last page in the file
     MyDB_PageReaderWriter last ();
 
+    size_t totalPageNumber();
+
+    MyDB_PageReaderWriter getPage(size_t pageId);
+
 private:
 
 	// ANYTHING YOU NEED HERE

@@ -59,5 +59,13 @@ MyDB_RecordIteratorPtr MyDB_TableReaderWriter :: getIterator (MyDB_RecordPtr) {
 void MyDB_TableReaderWriter :: writeIntoTextFile (string) {
 }
 
+size_t MyDB_TableReaderWriter :: totalPageNumber() {
+    return _pages.size();
+}
+
+MyDB_PageReaderWriter MyDB_TableReaderWriter :: getPage(size_t pageId) {
+    return _pages[pageId];
+}
+
 #endif
 
