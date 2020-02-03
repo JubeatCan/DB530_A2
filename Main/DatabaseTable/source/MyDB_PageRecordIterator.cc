@@ -14,7 +14,7 @@ void MyDB_PageRecordIterator::getNext() {
 }
 
 bool MyDB_PageRecordIterator::hasNext() {
-    return _pointTo + _recordPtr->getBinarySize() <= _pagePtr->getPageSize();
+    return _pointTo + _recordPtr->getBinarySize() <= _pagePtr->getWroteLen();
 }
 
 MyDB_PageRecordIterator::~MyDB_PageRecordIterator() {
