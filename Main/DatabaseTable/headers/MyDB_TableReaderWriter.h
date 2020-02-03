@@ -16,7 +16,7 @@ class MyDB_TableReaderWriter;
 typedef shared_ptr <MyDB_TableReaderWriter> MyDB_TableReaderWriterPtr;
 typedef shared_ptr <MyDB_PageReaderWriter> MyDB_PageReaderWriterPtr;
 
-class MyDB_TableReaderWriter {
+class MyDB_TableReaderWriter : public enable_shared_from_this<MyDB_TableReaderWriter> {
 
 public:
 

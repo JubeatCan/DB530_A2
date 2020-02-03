@@ -3,6 +3,7 @@
 #define TABLE_RW_C
 
 #include <fstream>
+#include "MyDB_TableRecordIterator.h"
 #include "MyDB_PageReaderWriter.h"
 #include "MyDB_TableReaderWriter.h"
 #include <vector>
@@ -70,8 +71,8 @@ void MyDB_TableReaderWriter :: loadFromTextFile (string fileName) {
     }
 }
 
-MyDB_RecordIteratorPtr MyDB_TableReaderWriter :: getIterator (MyDB_RecordPtr) {
-	return nullptr;
+MyDB_RecordIteratorPtr MyDB_TableReaderWriter :: getIterator (MyDB_RecordPtr recordPtr) {
+	return make_shared<MyDB_TableRecordIterator>(make_shared<MyDB_TableReaderWriter>(*this), recordPtr);
 }
 
 void MyDB_TableReaderWriter :: writeIntoTextFile (string fileName) {
