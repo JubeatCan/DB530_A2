@@ -14,7 +14,6 @@ MyDB_TableReaderWriter :: MyDB_TableReaderWriter (MyDB_TablePtr forMe, MyDB_Buff
     _tablePtr = forMe;
     _bufferManager = myBuffer;
     _pageSize = myBuffer->getPageSize();
-    count = 0;
 
     for (int i = 0; i <= _tablePtr->lastPage(); i++) {
         MyDB_PageHandle newPageHandle = _bufferManager->getPage(_tablePtr, i);
@@ -41,7 +40,6 @@ MyDB_PageReaderWriter MyDB_TableReaderWriter :: last () {
 
 
 void MyDB_TableReaderWriter :: append (MyDB_RecordPtr appendMe) {
-//    cout << count++ << endl;
     if (!_pages[_pages.size() - 1].append(appendMe)) {
         _tablePtr->setLastPage(_tablePtr->lastPage() + 1);
         MyDB_PageHandle newPageHandle(_bufferManager->getPage(_tablePtr, _tablePtr->lastPage()));
@@ -49,7 +47,6 @@ void MyDB_TableReaderWriter :: append (MyDB_RecordPtr appendMe) {
         newLastPageRW.clear();
         _pages.push_back(newLastPageRW);
         _pages[_pages.size() - 1].append(appendMe);
-//        cout << "----------" << count << endl;
     }
 }
 
@@ -75,7 +72,6 @@ void MyDB_TableReaderWriter :: loadFromTextFile (string fileName) {
         f.close();
     }
 
-//    cout << _pages.size() << endl;
 }
 
 MyDB_RecordIteratorPtr MyDB_TableReaderWriter :: getIterator (MyDB_RecordPtr recordPtr) {

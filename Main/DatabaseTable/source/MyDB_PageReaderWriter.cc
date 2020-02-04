@@ -32,14 +32,9 @@ void MyDB_PageReaderWriter :: setType (MyDB_PageType newType) {
 
 bool MyDB_PageReaderWriter :: append (MyDB_RecordPtr recordPtr) {
 
-//    cout << getHeaderSize() << " " << getWroteLen() << endl;
-
     if (_pageSize < (getHeaderSize() + getWroteLen() + recordPtr->getBinarySize())) {
-//        cout << _pageSize << "  " << getWroteLen() << "  " << recordPtr->getBinarySize() << endl;
-//cout << "Page" << count << endl;
         return false;
     }
-    count++;
     getHeader()->wrote_len = (char*)recordPtr->toBinary(getStart() + getWroteLen()) - (char*)getStart();
     _pageHandle -> wroteBytes();
 	return true;
@@ -48,7 +43,6 @@ bool MyDB_PageReaderWriter :: append (MyDB_RecordPtr recordPtr) {
 MyDB_PageReaderWriter::MyDB_PageReaderWriter(size_t pageSize, MyDB_PageHandle pageHandle) {
     _pageSize = pageSize;
     _pageHandle = pageHandle;
-    count = 0;
 }
 
 size_t MyDB_PageReaderWriter::getWroteLen() {

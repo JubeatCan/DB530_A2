@@ -56,7 +56,6 @@ private:
 	// ANYTHING ELSE YOU WANT HERE
 	size_t _pageSize;
 	MyDB_PageHandle _pageHandle;
-	int count;
 
 };
 
