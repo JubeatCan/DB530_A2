@@ -9,12 +9,12 @@ class MyDB_PageRecordIterator;
 
 void MyDB_PageRecordIterator::getNext() {
     if (hasNext()) {
-        _pointTo = (char *)(_recordPtr -> fromBinary(_pointTo + (char *)_pagePtr -> getHeader())) - (char*)_pagePtr -> getHeader();
+        _pointTo = (char *)(_recordPtr -> fromBinary(_pointTo + (char *)_pagePtr -> getStart())) - (char*)_pagePtr -> getStart();
     }
 }
 
 bool MyDB_PageRecordIterator::hasNext() {
-    return _pointTo + _recordPtr->getBinarySize() <= _pagePtr->getWroteLen();
+    return _pointTo  < _pagePtr->getWroteLen();
 }
 
 MyDB_PageRecordIterator::~MyDB_PageRecordIterator() {

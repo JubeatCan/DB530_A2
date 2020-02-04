@@ -8,13 +8,16 @@
 class MyDB_PageRecordIterator;
 
 void MyDB_PageReaderWriter :: clear () {
-    _wroteLen = 0;
-    _type = RegularPage;
+    getHeader()->pageType = RegularPage;
+    getHeader()->wrote_len = 0;
+
     _pageHandle->wroteBytes();
 }
 
+
+
 MyDB_PageType MyDB_PageReaderWriter :: getType () {
-	return _type;
+	return getHeader()->pageType;
 }
 
 MyDB_RecordIteratorPtr MyDB_PageReaderWriter :: getIterator (MyDB_RecordPtr recordPtr) {
@@ -23,18 +26,21 @@ MyDB_RecordIteratorPtr MyDB_PageReaderWriter :: getIterator (MyDB_RecordPtr reco
 }
 
 void MyDB_PageReaderWriter :: setType (MyDB_PageType newType) {
-    _type = newType;
+    getHeader()->pageType = newType;
     _pageHandle->wroteBytes();
 }
 
 bool MyDB_PageReaderWriter :: append (MyDB_RecordPtr recordPtr) {
 
-    if (_pageSize < (_wroteLen + recordPtr->getBinarySize())) {
-        cout << _pageSize << "  " << _wroteLen << "  " << recordPtr->getBinarySize() << endl;
+//    cout << getHeaderSize() << " " << getWroteLen() << endl;
+
+    if (_pageSize < (getHeaderSize() + getWroteLen() + recordPtr->getBinarySize())) {
+//        cout << _pageSize << "  " << getWroteLen() << "  " << recordPtr->getBinarySize() << endl;
+//cout << "Page" << count << endl;
         return false;
     }
-
-    _wroteLen = (char*)recordPtr->toBinary(getHeader() + _wroteLen) - (char*)getHeader();
+    count++;
+    getHeader()->wrote_len = (char*)recordPtr->toBinary(getStart() + getWroteLen()) - (char*)getStart();
     _pageHandle -> wroteBytes();
 	return true;
 }
@@ -42,8 +48,23 @@ bool MyDB_PageReaderWriter :: append (MyDB_RecordPtr recordPtr) {
 MyDB_PageReaderWriter::MyDB_PageReaderWriter(size_t pageSize, MyDB_PageHandle pageHandle) {
     _pageSize = pageSize;
     _pageHandle = pageHandle;
-    _wroteLen = 0;
-    _type = RegularPage;
+    count = 0;
+}
+
+size_t MyDB_PageReaderWriter::getWroteLen() {
+    return getHeader()->wrote_len;
+}
+
+PageHeader* MyDB_PageReaderWriter::getHeader() {
+    return (PageHeader*) _pageHandle->getBytes();
+}
+
+char *MyDB_PageReaderWriter::getStart() {
+    return &(getHeader()->start[0]);
+}
+
+size_t MyDB_PageReaderWriter::getHeaderSize() {
+    return getStart() - (char *)getHeader();
 }
 
 #endif

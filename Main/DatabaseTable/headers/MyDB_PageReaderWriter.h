@@ -9,6 +9,12 @@
 
 using namespace std;
 
+struct PageHeader{
+    MyDB_PageType pageType;
+    size_t wrote_len;
+    char start[0];
+};
+
 class MyDB_PageReaderWriter : public enable_shared_from_this<MyDB_PageReaderWriter> {
 
 public:
@@ -37,25 +43,20 @@ public:
 
 	MyDB_PageReaderWriter(size_t, MyDB_PageHandle);
 
-	size_t getPageSize() {
-	    return _pageSize;
-	}
+	PageHeader* getHeader();
 
-	char* getHeader() {
-	    return (char*)_pageHandle->getBytes();
-	}
+	size_t getWroteLen();
 
-	size_t getWroteLen() {
-	    return _wroteLen;
-	}
+	char* getStart();
+
+	size_t getHeaderSize();
 	
 private:
 
 	// ANYTHING ELSE YOU WANT HERE
 	size_t _pageSize;
 	MyDB_PageHandle _pageHandle;
-	size_t _wroteLen;
-	MyDB_PageType _type;
+	int count;
 
 };
 

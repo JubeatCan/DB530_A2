@@ -61,6 +61,7 @@ private:
 	//vector<MyDB_PageReaderWriterPtr> _pages;
     vector<MyDB_PageReaderWriter> _pages;
 	size_t _pageSize;
+	int count;
 
 };
 
