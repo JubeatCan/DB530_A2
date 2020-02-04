@@ -20,8 +20,6 @@ bool MyDB_TableRecordIterator::hasNext() {
     if (_recordIter->hasNext()) {
         return true;
     }
-
-//    cout << "---" <<  _tablePtr->totalPageNumber() << endl;
     if (_pageId == _tablePtr->totalPageNumber() - 1) {
         return false;
     }
